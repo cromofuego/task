@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import { TaskCounter } from '../TaskCounter';
-import { SearchTodo } from '../SearchTodo';
-import { TaskList } from "../TaskList";
-import { Task } from '../Task';
+import React, { useEffect, useState } from "react";
+import { AppUI } from './AppUI.js';
 
 
 
@@ -34,39 +31,65 @@ import { Task } from '../Task';
 // ];
 
 function useLocalStorage(itemName, initialValue) {
+
     const localStorageTodo = localStorage.getItem(itemName);
+    
     let parsedItem;
 
-    if(!localStorageTodo){
-        localStorage.setItem(itemName, JSON.stringify(initialValue))
-        parsedItem = initialValue;
-    } else {
-        parsedItem = JSON.parse(localStorageTodo);                       
-    }
+    const [ item, setItem] = React.useState(initialValue);
+    const [ loading , setLoading] = React.useState(true);
+    const [ error , setError] = React.useState(false);
 
-    const [ item, setItem] = React.useState(parsedItem);
+    
+
+    useEffect(() => {
+        setTimeout(() => {
+            try {
+                if(!localStorageTodo){
+                    localStorage.setItem(itemName, JSON.stringify(initialValue))
+                    parsedItem = initialValue;
+                } else {
+                    parsedItem = JSON.parse(localStorageTodo);                       
+                }
+                setLoading(false)
+            } catch(error) {
+                setError(error)                
+            }
+        }, 1000)
+    });
+
 
     const saveItem = (newItem) => {
-        const stringifiedTodo = JSON.stringify(newItem)
-        localStorage.setItem(itemName, stringifiedTodo)
-        setItem(newItem)
+        try {
+            const stringifiedTodo = JSON.stringify(newItem)
+            localStorage.setItem(itemName, stringifiedTodo)
+            setItem(newItem)
+        } catch(error) {
+            setError(error)
+        }
+
     }
 
-    return [
+    return {
         item,
-        saveItem
-    ]
+        saveItem,
+        loading,
+        error,
+    }    
 }
 
 
 function App() {
     
-    const [ todos, setSaveTodo ] = useLocalStorage('TODO_V1', []);
+    const {
+        item: todos,
+        saveItem: setSaveTodo,
+        loading,
+        error,
+    } = useLocalStorage('TODO_V1', []);
     const [ searchValue, setSearchValue] = React.useState('');  
 
-
-    let searchedTodos = [];
-    
+    let searchedTodos = [];    
 
     if (!!searchValue) {
         searchedTodos = todos.filter(todo => {
@@ -105,34 +128,17 @@ function App() {
 
 
     return(
-        <React.Fragment>
-            <TaskCounter
-                totalTodos={totalTodos}
-                completedTodos={completedTodos.length}
-            />
-            <SearchTodo
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-            />
-
-            <TaskList>
-                {searchedTodos.map(todo => {
-                    if (!!todo) {
-                        return (
-                            <Task
-                                onDelete={onDelete}
-                                onChange={onChange}
-                                todoComplete={todo.complete}
-                                todoDescriptionTask={todo.descriptionTask}
-                                key={todo.descriptionTask}
-                            />
-                        );
-                    }
-                })}
-            </TaskList>
-            
-        </React.Fragment>
-
+      <AppUI
+      loading={loading}
+      error={error}
+      searchedTodos={searchedTodos}
+      totalTodos={totalTodos}
+      completedTodos={completedTodos}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      onChange={onChange}
+      onDelete={onDelete}        
+      />
     );
 }
 
