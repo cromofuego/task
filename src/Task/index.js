@@ -3,8 +3,7 @@ import '../body.css';
 import './Task.css';
 
 
-function Task( {todoComplete, todoDescriptionTask, onChange, onDelete}) {
-
+function Task({todoComplete, todoDescriptionTask, onChange, onDelete}) {
   let task;
   if(todoComplete){
     task = 'Tarea Completada';    
