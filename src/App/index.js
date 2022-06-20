@@ -33,25 +33,35 @@ import { Task } from '../Task';
 //     },
 // ];
 
-function useLocalStorage() {
-    
+function useLocalStorage(itemName, initialValue) {
+    const localStorageTodo = localStorage.getItem(itemName);
+    let parsedItem;
+
+    if(!localStorageTodo){
+        localStorage.setItem(itemName, JSON.stringify(initialValue))
+        parsedItem = initialValue;
+    } else {
+        parsedItem = JSON.parse(localStorageTodo);                       
+    }
+
+    const [ item, setItem] = React.useState(parsedItem);
+
+    const saveItem = (newItem) => {
+        const stringifiedTodo = JSON.stringify(newItem)
+        localStorage.setItem(itemName, stringifiedTodo)
+        setItem(newItem)
+    }
+
+    return [
+        item,
+        saveItem
+    ]
 }
 
 
 function App() {
-
-    const localStorageTodo = localStorage.getItem('TODO_V1');
-    let parsedTodos;
-
-    if(!localStorageTodo){
-        localStorage.setItem('TODO_V1', JSON.stringify([]))
-        parsedTodos = [];
-    } else {
-        parsedTodos = JSON.parse(localStorageTodo);                       
-    }
-
-    const [ todos, setTodos] = React.useState(parsedTodos);
-
+    
+    const [ todos, setSaveTodo ] = useLocalStorage('TODO_V1', []);
     const [ searchValue, setSearchValue] = React.useState('');  
 
 
@@ -74,12 +84,6 @@ function App() {
         return todo.complete
     }); 
 
-    const saveTodo = (arrayTodo) => {
-        const stringifiedTodo = JSON.stringify(arrayTodo)
-        localStorage.setItem('TODO_V1', stringifiedTodo)
-        setTodos(arrayTodo)
-    }
-
     const onChange = (text) => {    
         const indexTodo = todos.findIndex(todo => todo.descriptionTask === text);
         let changeTodo = [...todos]
@@ -88,14 +92,14 @@ function App() {
         } else {
         changeTodo[indexTodo].complete = true; 
         }
-       saveTodo(changeTodo)
+       setSaveTodo(changeTodo)
     }
 
     const onDelete = (text) => {    
         const indexTodo = todos.findIndex(todo => todo.descriptionTask === text);
         let changeTodo = [...todos]        
         changeTodo.splice(indexTodo, 1)
-       saveTodo(changeTodo)
+       setSaveTodo(changeTodo)
     }
 
 
