@@ -1,0 +1,21 @@
+.container-button_absolute_add {    
+    width: 6.2rem;
+    height: 6.2rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 510px;
+    right: 10px;
+}
+.button-add {
+    cursor: pointer;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 7rem;
+    border: none;
+    width: 6.2rem;
+    height: 6.2rem;
+    border-radius: 50%;
+}

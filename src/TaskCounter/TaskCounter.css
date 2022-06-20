@@ -1,0 +1,27 @@
+.header-container_h1_p {
+    font-size: 2.0rem;    
+    text-align: center;
+    margin-top: 1.5rem;
+}
+.container-counters {
+    display: flex;
+    justify-content: space-around;    
+}
+.container-counters {
+    height: auto;
+    margin-top: 1.5rem;
+}
+.container-counter {
+    display: flex;
+    flex-direction: column;
+    border: solid black;
+    border-radius: 5px;
+}
+.container-counter  p {    
+    margin: 0.5rem 0.5rem;
+    font-size: 1.9rem;
+}
+.container-counter  span {    
+    margin: 0.5rem 0.5rem;
+    font-size: 1.9rem;
+}

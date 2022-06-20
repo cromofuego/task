@@ -1,0 +1,66 @@
+.main-container_li {
+    border: 2.5px solid black;
+    border-radius: 15px;
+    margin: 1rem;
+}
+/**/
+.li-container_top_span_p {
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.span {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0);
+    width: 24px;
+    height: 24px;
+    margin: 0.5rem 0.5rem;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+.span--active {
+    background-color: rgba(45, 207, 30, 0.945);
+}
+.li-container_top_span_p p{
+    margin: 0.5rem 0.5rem;
+    font-size: 1.9rem;
+    width: 90%;
+    text-align: center;
+}
+/**/
+.li-container_middle_p {
+    width: 100%;
+}
+.li-container_middle_p p{
+    overflow-wrap: break-word;
+    margin: 0.5rem;
+    font-size: 2.2rem;
+    text-align: start;
+}
+.li-p--active {
+    text-decoration: line-through;
+}
+/**/
+.li-container_bottom_buttons {
+    border-top: 1px solid black;
+    padding: 1rem ;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.li-container_bottom_buttons button {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    padding: 0.6rem;
+    border: 0.6px solid rgba(138, 138, 172, 0.404);
+}
+.li-container_bottom_buttons button:active {
+    background-color: rgba(62, 50, 119, 0.308);
+}
+.li-container_bottom_buttons_delete_add {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
