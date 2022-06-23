@@ -1,0 +1,49 @@
+.container-form {
+    border-radius: 35px;
+    height: 35.0rem;
+    width: 30.0rem;
+    background-color:#218f78;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container-form .label {
+    margin-top: 1rem;
+    font-size: 2rem ;
+}
+.container-form .textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+    border-radius: 15px;
+    border: 0;
+    outline: none;
+    margin: 1rem 0rem;
+    padding: 1.2rem;
+    text-align: center;
+    height: 25.5rem;
+    width: 25.5rem;
+
+}
+.container-buttons {
+    margin-bottom: 1rem;
+    width: 25rem;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between ;
+}
+.container-buttons  .save-button, .cancel-button {
+    cursor: pointer;
+    font-size: 2rem;
+    color: black;
+    border: none;
+    width: 10.0rem;
+    height: 4.5rem;
+    border-radius: 15px;    
+}
+.container-buttons  .save-button:active {
+    background-color: #63955b;    
+}
+.container-buttons  .cancel-button:active {
+    background-color: #d73535;  
+}
+

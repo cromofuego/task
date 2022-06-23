@@ -4,14 +4,16 @@ import { SearchTodo } from '../SearchTodo';
 import { TaskList } from "../TaskList";
 import { Task } from '../Task';
 import { TodoContext } from '../TodoContext';
+import { Modal } from '../Modal';
+import { TaskForm } from '../TaskForm';
 
 function AppUI() {
     const {
+        openModal,
+        setOpenModal,
         error,
         loading,
         searchedTodos,
-        onChange,
-        onDelete,
     } = React.useContext(TodoContext);
 
     return (
@@ -20,17 +22,25 @@ function AppUI() {
             <TaskCounter />
             <SearchTodo />
 
-            <TaskList>
-                {error && <p>Desesperate ocurrio un error</p>}
-                {loading && <p>Estamos cargando no es desesperecios XD</p>}
-                {(!loading && !searchedTodos.length) && <p>Crea tu primer Tarea</p>}
+            <TaskList
+                setOpenModal={setOpenModal}
+            >
+                {error && <div className='container-p_error'>
+                    <p className='p_error' >Desesperate ocurrio un error</p>
+                </div>}
+                {loading && <p className='container-p_loading' >Estamos cargando no es desesperecios XD</p>}
+                {(!loading && !searchedTodos.length) &&
+                    <div className='container-new_task' >
+                        <p className='p_new_task' >
+                            Crea tu primer Tarea
+                        </p>
+                    </div>
+                }
 
                 {searchedTodos.map(todo => {
                     if (!!todo) {
                         return (
                             <Task
-                                onChange={onChange}
-                                onDelete={onDelete}
                                 todoComplete={todo.complete}
                                 todoDescriptionTask={todo.descriptionTask}
                                 key={todo.descriptionTask}
@@ -39,6 +49,11 @@ function AppUI() {
                     }
                 })}
             </TaskList>
+
+            {!!openModal && (
+                <Modal>
+                    <TaskForm /> {/*En el Task Form esta la ventana de edicion y del formulario*/}
+                </Modal>)}
 
         </React.Fragment>
     );

@@ -1,3 +1,4 @@
+
 .container-button_absolute_add {    
     width: 6.2rem;
     height: 6.2rem;
@@ -5,6 +6,8 @@
     position: fixed;
     top: 510px;
     right: 10px;
+    z-index: 10;
+
 }
 .button-add {
     cursor: pointer;
@@ -14,8 +17,36 @@
     align-items: center;
     text-align: center;
     font-size: 7rem;
-    border: none;
+    border: 1px solid;
     width: 6.2rem;
     height: 6.2rem;
     border-radius: 50%;
+
+}
+.container-new_task{
+    margin: 0 1rem;
+    min-width: 300px;
+}
+.p_new_task {
+    width: 100%;
+    font-size: 4rem;
+    height: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border: solid black;
+    border-radius: 25px;
+}
+@media (min-width: 1000px) {
+    .li-container {        
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+    .container-button_absolute_add{
+        top: 580px;
+        right: 30px;
+    }
+    
+    
 }

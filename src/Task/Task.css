@@ -64,3 +64,8 @@
     display: flex;
     justify-content: space-around;
 }
+@media (min-width: 1000px) {
+    .main-container_li {        
+    max-width: 320px;
+    }
+}
