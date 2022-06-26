@@ -41,11 +41,11 @@ function Task({ todoComplete, todoDescriptionTask }) {
             {/* ventana principal */}
             <div className='main-container_li'>
                 <div className='li-container_top_span_p' >
-                    <input
+                    <span
                         onClick={() => onChange(todoDescriptionTask)}
                         className={`span ${todoComplete && 'span--active '}`}
                     >
-                    </input>
+                    </span>
 
                     <p className='li-container_top_span_p_p'>{task}</p>
                 </div>
